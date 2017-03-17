@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "target": "es5"
+    },
+    "include": [
+        "app.ts",
+        "1.Models/*",
+        "2.Repositories/*",
+        "3.Services/*",
+        "4.Controllers/*"
+    ],
+    "exclude": [
+        "node_modules/*",
+        "6.StaticScripts/*"
+    ]
+}

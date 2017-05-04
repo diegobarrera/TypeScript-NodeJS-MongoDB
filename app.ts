@@ -6,8 +6,8 @@ import namedRouters = require('named-routes');
 import mongoose = require("mongoose");
 import userRepository = require('./2.Repositories/userRepository');
 import userService = require('./3.Services/userService');
-import homeController = require('./4.controllers/homeController');
-import testController = require('./4.controllers/testController');
+import homeController = require('./4.Controllers/homeController');
+import testController = require('./4.Controllers/testController');
 require('express-di');
 
 let app = express();
@@ -56,8 +56,8 @@ app.use(function (request, response, next) {
 let blocks = {};
 let Handlebars = exphbs.create({
     defaultLayout: 'main',
-    layoutsDir: __dirname + '/5.views/layouts/',
-    partialsDir: __dirname + '/5.views/partials/',
+    layoutsDir: __dirname + '/5.Views/layouts/',
+    partialsDir: __dirname + '/5.Views/partials/',
     helpers: {
         url: function (routeName, params) {
             return app.locals.url(routeName, params);
@@ -90,7 +90,7 @@ let Handlebars = exphbs.create({
 // View engine setup
 app.engine('handlebars', Handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('views', __dirname + '/5.views');
+app.set('views', __dirname + '/5.Views');
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
@@ -98,6 +98,7 @@ http.createServer(app).listen(app.get('port'), function () {
 
 // connect MongoDb
 let uri = 'mongodb://localhost/riahk';
+mongoose.Promise = global.Promise;
 mongoose.connect(uri, (err) => {
     if (err) {
         console.log(err.message);

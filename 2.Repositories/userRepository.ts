@@ -1,9 +1,9 @@
-import RepositoryBase = require('../2.Repositories/RepositoryBase');
-import UserModel = require('../1.Models/user');
+import { RepositoryBase } from "./RepositoryBase";
+import { IUserModel, UserSchema } from "../1.Models/user";
 
-export class UserRepository extends RepositoryBase.RepositoryBase<UserModel.IUserModel> {
+export class UserRepository extends RepositoryBase<IUserModel> {
   constructor() {
-    super(UserModel.UserSchema);
+    super(UserSchema);
   }
 }
 

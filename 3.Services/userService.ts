@@ -1,26 +1,26 @@
+import { IUserModel } from "../1.Models/user";
+import { UserRepository } from "../2.Repositories/userRepository";
 import promise = require("promise");
-import userModel = require('../1.Models/user');
-import repository = require('../2.Repositories/userRepository');
 
 // a interface of user service
 export interface IUserService {
-    createUser(user: userModel.IUserModel): promise.IThenable<userModel.IUserModel>;
-    findUser(name: string): promise.IThenable<userModel.IUserModel>;
+    createUser(user: IUserModel): Promise<IUserModel>;
+    findUser(name: string): Promise<IUserModel>;
 }
 
 // a class of user serivce
 export class UserService implements IUserService {
-    private _UserRepo: repository.UserRepository;
+    private _UserRepo: UserRepository;
 
-    constructor(UserRepo: repository.UserRepository) {
+    constructor(UserRepo: UserRepository) {
         this._UserRepo = UserRepo;
     }
 
     // create a user from model
-    createUser(user: userModel.IUserModel): promise.IThenable<userModel.IUserModel> {
-        let p = new promise((resolve, reject) => {
+    createUser(user: IUserModel): Promise<IUserModel> {
+        let p: Promise<IUserModel> = new promise((resolve, reject) => {
 
-            let User = <userModel.IUserModel>{
+            let User: IUserModel = <IUserModel>{
                 name: user.name,
                 age: user.age,
                 address: user.address,
@@ -32,8 +32,7 @@ export class UserService implements IUserService {
                 if (err) {
                     // error callback
                     reject(err);
-                }
-                else {
+                } else {
                     // success callback
                     resolve(res);
                 }
@@ -44,21 +43,19 @@ export class UserService implements IUserService {
     }
 
     // find a user by name
-    findUser(name: string): promise.IThenable<userModel.IUserModel> {
-        let p = new promise((resolve, reject) => {
+    findUser(name: string): Promise<IUserModel> {
+        let p: Promise<IUserModel> = new promise((resolve, reject) => {
 
             // call repository to find user
             this._UserRepo.find({ name: name }).sort({ createdAt: -1 }).limit(1).exec((err, res) => {
                 if (err) {
                     // error callback
                     reject(err);
-                }
-                else {
+                } else {
                     // success callback
                     if (res.length) {
                         resolve(res[0]);
-                    }
-                    else {
+                    } else {
                         resolve(null);
                     }
                 }

@@ -1,11 +1,13 @@
 // register mongoose library
-import mongoose = require("mongoose");
+import { Document, model, Model } from "mongoose";
+import Mongoose = require("mongoose");
 
 // export is a keyword that makes a class/interface public
-export let Schema = mongoose.Schema;
+// tslint:disable-next-line:typedef
+export const Schema = Mongoose.Schema;
 
 // model of entity User
-export interface IUserModel extends mongoose.Document {
+export interface IUserModel extends Document {
     name: string;
     address: string;
     phone: string;
@@ -15,7 +17,7 @@ export interface IUserModel extends mongoose.Document {
 }
 
 // define the schema (field, validation) of entity User
-let schema = new Schema({
+let schema: Mongoose.Schema = new Schema({
     name: {
         type: String,
         required: true
@@ -40,11 +42,11 @@ let schema = new Schema({
         type: Date,
         required: false
     }
-}).pre('save', function (next) {
+}).pre("save", (next: any) => {
     // this will run before saving
     if (this._doc) {
-        let doc = <IUserModel>this._doc;
-        let now = new Date();
+        let doc: IUserModel = <IUserModel>this._doc;
+        let now: Date = new Date();
         if (!doc.createdAt) {
             doc.createdAt = now;
         }
@@ -53,6 +55,5 @@ let schema = new Schema({
     next();
     return this;
 });
-
 // map user model to collection Users in mongoose database
-export let UserSchema = mongoose.model<IUserModel>('user', schema, 'Users', true);
+export let UserSchema: Model<IUserModel> = model<IUserModel>("user", schema, "Users", true);

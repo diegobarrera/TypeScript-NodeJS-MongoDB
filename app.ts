@@ -97,7 +97,7 @@ app.engine("handlebars", Handlebars.engine);
 app.set("view engine", "handlebars");
 app.set("views", __dirname + "/5.views");
 
-http.createServer(app).listen(app.get("port"), function () {
+http.createServer(app).listen(app.get("port"), () => {
     console.log("Express server listening on port " + app.get("port"));
 });
 

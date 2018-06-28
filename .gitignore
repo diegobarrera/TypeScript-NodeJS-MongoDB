@@ -246,14 +246,5 @@ ModelManifest.xml
 *.log
 *.log.*
 
-1.Models/*.js
-1.Models/*.js.map
-2.Repositories/*.js
-2.Repositories/*.js.map
-3.Services/*.js
-3.Services/*.js.map
-4.Controllers/*.js
-4.Controllers/*.js.map
-app.js
-app.js.map
 package-lock.json
+dist/*

@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "outDir": "./dist",
         "module": "commonjs",
         "noImplicitAny": true,
         "removeComments": true,
@@ -16,6 +17,5 @@
     ],
     "exclude": [
         "node_modules/*",
-        "6.StaticScripts/*"
     ]
 }

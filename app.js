@@ -1,67 +1,67 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var http = require("http");
-var express = require("express");
-var exphbs = require("express-handlebars");
-var namedRouters = require("named-routes");
-var mongoose = require("mongoose");
-var userRepository = require("./2.Repositories/userRepository");
-var userService = require("./3.Services/userService");
-var homeController = require("./4.controllers/homeController");
-var testController = require("./4.controllers/testController");
-require('express-di');
-var app = express();
-app.set('port', process.env.PORT || 3000);
-var repo = new userRepository.UserRepository();
-var service = new userService.UserService(repo);
-var home_controller = new homeController.HomeController(service);
-var test_controller = new testController.TestController();
-app.factory('home_controller', function (req, res, next) {
+const http = require("http");
+const express = require("express");
+const exphbs = require("express-handlebars");
+const Routers = require("named-routes");
+const mongoose = require("mongoose");
+require("express-di");
+const userRepository_1 = require("./2.Repositories/userRepository");
+const homeController_1 = require("./4.controllers/homeController");
+const testController_1 = require("./4.controllers/testController");
+const userService_1 = require("./3.Services/userService");
+let app = express();
+app.set("port", process.env.PORT || 3000);
+let repo = new userRepository_1.UserRepository();
+let service = new userService_1.UserService(repo);
+var home_controller = new homeController_1.HomeController(service);
+var test_controller = new testController_1.TestController();
+app.factory("home_controller", (req, res, next) => {
     next(null, home_controller);
 });
-app.factory('test_controller', function (req, res, next) {
+app.factory("test_controller", (req, res, next) => {
     next(null, test_controller);
 });
-app.get('/', function (home_controller, req, res) {
+app.get("/", (home_controller, req, res) => {
     home_controller.index(req, res);
 });
-app.get('/test', function (test_controller, req, res) {
+app.get("/test", (test_controller, req, res) => {
     test_controller.index(req, res);
 });
-var router = new namedRouters();
+let router = new Routers();
 router.extendExpress(app);
 router.registerAppHelpers(app);
-app.use("/6.StaticScripts", express.static('6.StaticScripts'));
-var activeRoute = '';
-app.use(function (request, response, next) {
-    var route = router.match(request);
+app.use("/6.StaticScripts", express.static("6.StaticScripts"));
+let activeRoute = "";
+app.use((request, response, next) => {
+    let route = router.match(request);
     if (route) {
         activeRoute = route.route.options.name;
     }
     next();
 });
-var blocks = {};
-var Handlebars = exphbs.create({
-    defaultLayout: 'main',
-    layoutsDir: __dirname + '/5.views/layouts/',
-    partialsDir: __dirname + '/5.views/partials/',
+let blocks = {};
+let Handlebars = exphbs.create({
+    defaultLayout: "main",
+    layoutsDir: __dirname + "/5.views/layouts/",
+    partialsDir: __dirname + "/5.views/partials/",
     helpers: {
-        url: function (routeName, params) {
+        url: (routeName, params) => {
             return app.locals.url(routeName, params);
         },
-        activeRoute: function (routeName) {
-            return routeName === activeRoute ? 'active' : '';
+        activeRoute: (routeName) => {
+            return routeName === activeRoute ? "active" : "";
         },
-        activeRoutes: function (routeNames) {
-            return routeNames.split(',').indexOf(activeRoute) >= 0 ? 'active' : '';
+        activeRoutes: (routeNames) => {
+            return routeNames.split(",").indexOf(activeRoute) >= 0 ? "active" : "";
         },
-        block: function (name) {
-            var val = (blocks[name] || []).join('\n');
+        block: (name) => {
+            let val = (blocks[name] || []).join("\n");
             blocks[name] = [];
             return val;
         },
-        extend: function (name, context) {
-            var block = blocks[name];
+        extend: (name, context) => {
+            let block = blocks[name];
             if (!block) {
                 block = blocks[name] = [];
             }
@@ -69,20 +69,20 @@ var Handlebars = exphbs.create({
         }
     }
 });
-app.engine('handlebars', Handlebars.engine);
-app.set('view engine', 'handlebars');
-app.set('views', __dirname + '/5.views');
-http.createServer(app).listen(app.get('port'), function () {
-    console.log('Express server listening on port ' + app.get('port'));
+app.engine("handlebars", Handlebars.engine);
+app.set("view engine", "handlebars");
+app.set("views", __dirname + "/5.views");
+http.createServer(app).listen(app.get("port"), function () {
+    console.log("Express server listening on port " + app.get("port"));
 });
-var uri = 'mongodb://localhost/riahk';
-mongoose.connect(uri, function (err) {
+let uri = "mongodb://localhost/riahk";
+mongoose.connect(uri, (err) => {
     if (err) {
         console.log(err.message);
         console.log(err);
     }
     else {
-        console.log('Connected to MongoDb');
+        console.log("Connected to MongoDb");
     }
 });
 //# sourceMappingURL=app.js.map

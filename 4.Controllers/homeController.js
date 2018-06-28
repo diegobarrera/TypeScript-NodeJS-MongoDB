@@ -1,38 +1,35 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var HomeController = (function () {
-    function HomeController(UserService) {
+class HomeController {
+    constructor(UserService) {
         this._UserService = UserService;
     }
-    HomeController.prototype.index = function (expressReq, expressRes) {
-        var _this = this;
-        var user = { name: 'Steve', age: 30, address: 'address' };
-        this._UserService.createUser(user).then(function (res) {
-            _this._UserService.findUser('Steve').then(function (res) {
-                var hero = res;
+    index(expressReq, expressRes) {
+        var user = { name: "Steve", age: 30, address: "address" };
+        this._UserService.createUser(user).then((res) => {
+            this._UserService.findUser("Steve").then((res) => {
+                let hero = res;
                 hero.age = 20;
-                hero.save(function (err, res) {
+                hero.save((err, res) => {
                     if (err) {
                         console.log(err);
                     }
                     else {
-                        expressRes.render('home/index', { name: hero.name, age: hero.age });
+                        expressRes.render("home/index", { name: hero.name, age: hero.age });
                     }
                 });
-            }, function (err) {
+            }, (err) => {
                 if (err) {
                     console.log(err.message);
                 }
             });
-        }, function (err) {
+        }, (err) => {
             if (err) {
                 console.log(err.message);
                 console.log(err);
             }
         });
-    };
-    ;
-    return HomeController;
-}());
+    }
+}
 exports.HomeController = HomeController;
 //# sourceMappingURL=homeController.js.map

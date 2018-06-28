@@ -1,20 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var promise = require("promise");
-var UserService = (function () {
-    function UserService(UserRepo) {
+const promise = require("promise");
+class UserService {
+    constructor(UserRepo) {
         this._UserRepo = UserRepo;
     }
-    UserService.prototype.createUser = function (user) {
-        var _this = this;
-        var p = new promise(function (resolve, reject) {
-            var User = {
+    createUser(user) {
+        let p = new promise((resolve, reject) => {
+            let User = {
                 name: user.name,
                 age: user.age,
                 address: user.address,
                 phone: user.phone,
             };
-            _this._UserRepo.create(User, function (err, res) {
+            this._UserRepo.create(User, (err, res) => {
                 if (err) {
                     reject(err);
                 }
@@ -24,11 +23,10 @@ var UserService = (function () {
             });
         });
         return p;
-    };
-    UserService.prototype.findUser = function (name) {
-        var _this = this;
-        var p = new promise(function (resolve, reject) {
-            _this._UserRepo.find({ name: name }).sort({ createdAt: -1 }).limit(1).exec(function (err, res) {
+    }
+    findUser(name) {
+        let p = new promise((resolve, reject) => {
+            this._UserRepo.find({ name: name }).sort({ createdAt: -1 }).limit(1).exec((err, res) => {
                 if (err) {
                     reject(err);
                 }
@@ -43,9 +41,8 @@ var UserService = (function () {
             });
         });
         return p;
-    };
-    return UserService;
-}());
+    }
+}
 exports.UserService = UserService;
 Object.seal(UserService);
 //# sourceMappingURL=userService.js.map

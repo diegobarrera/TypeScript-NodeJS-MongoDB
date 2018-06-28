@@ -1,13 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var TestController = (function () {
-    function TestController() {
+class TestController {
+    constructor() {
     }
-    TestController.prototype.index = function (expressReq, expressRes) {
+    index(expressReq, expressRes) {
         expressRes.json({ message: 'hooray! welcome to our api!' });
-    };
+    }
     ;
-    return TestController;
-}());
+}
 exports.TestController = TestController;
 //# sourceMappingURL=testController.js.map

@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var mongoose = require("mongoose");
-exports.Schema = mongoose.Schema;
-var schema = new exports.Schema({
+const mongoose_1 = require("mongoose");
+const Mongoose = require("mongoose");
+exports.Schema = Mongoose.Schema;
+let schema = new exports.Schema({
     name: {
         type: String,
         required: true
@@ -27,10 +28,11 @@ var schema = new exports.Schema({
         type: Date,
         required: false
     }
-}).pre('save', function (next) {
+}).pre("save", (next) => {
+    console.log(this._doc);
     if (this._doc) {
-        var doc = this._doc;
-        var now = new Date();
+        let doc = this._doc;
+        let now = new Date();
         if (!doc.createdAt) {
             doc.createdAt = now;
         }
@@ -39,5 +41,5 @@ var schema = new exports.Schema({
     next();
     return this;
 });
-exports.UserSchema = mongoose.model('user', schema, 'Users', true);
+exports.UserSchema = mongoose_1.model("user", schema, "Users", true);
 //# sourceMappingURL=user.js.map

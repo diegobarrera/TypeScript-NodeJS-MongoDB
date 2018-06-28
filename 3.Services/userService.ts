@@ -10,10 +10,10 @@ export interface IUserService {
 
 // a class of user serivce
 export class UserService implements IUserService {
-    private _UserRepo: UserRepository;
+    private _userRepo: UserRepository;
 
-    constructor(UserRepo: UserRepository) {
-        this._UserRepo = UserRepo;
+    constructor(userRepo: UserRepository) {
+        this._userRepo = userRepo;
     }
 
     // create a user from model
@@ -28,7 +28,7 @@ export class UserService implements IUserService {
             };
 
             // call repository to create user
-            this._UserRepo.create(User, (err, res) => {
+            this._userRepo.create(User, (err, res) => {
                 if (err) {
                     // error callback
                     reject(err);
@@ -47,7 +47,7 @@ export class UserService implements IUserService {
         let p: Promise<IUserModel> = new promise((resolve, reject) => {
 
             // call repository to find user
-            this._UserRepo.find({ name: name }).sort({ createdAt: -1 }).limit(1).exec((err, res) => {
+            this._userRepo.find({ name: name }).sort({ createdAt: -1 }).limit(1).exec((err, res) => {
                 if (err) {
                     // error callback
                     reject(err);

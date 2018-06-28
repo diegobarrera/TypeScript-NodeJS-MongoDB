@@ -14,6 +14,10 @@ import { Request, Response } from "express";
 let app: core.Express = express();
 app.set("port", process.env.PORT || 3000);
 
+if (process.pid) {
+    console.log("This process is your pid " + process.pid);
+}
+
 // apply DI priciple
 let repo: UserRepository = new UserRepository();
 let service: IUserService = new UserService(repo);

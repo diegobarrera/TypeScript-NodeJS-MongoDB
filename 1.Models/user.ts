@@ -44,7 +44,6 @@ let schema: Mongoose.Schema = new Schema({
     }
 }).pre("save", (next: any) => {
     // this will run before saving
-    console.log(this._doc);
     if (this._doc) {
         let doc: IUserModel = <IUserModel>this._doc;
         let now: Date = new Date();
@@ -56,6 +55,5 @@ let schema: Mongoose.Schema = new Schema({
     next();
     return this;
 });
-
 // map user model to collection Users in mongoose database
 export let UserSchema: Model<IUserModel> = model<IUserModel>("user", schema, "Users", true);

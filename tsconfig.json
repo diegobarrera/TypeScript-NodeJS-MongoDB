@@ -8,16 +8,8 @@
         "sourceMap": true,
         "target": "es6"
     },
-    "include": [
-        "app.ts",
-        "models/*",
-        "repositories/*",
-        "services/*",
-        "controllers/*"
-    ],
+    //"include": [],
     "exclude": [
-        "node_modules/*",
-        "services-mock/*",
-        "*.spec.ts",
+        "node_modules/*"
     ]
 }

@@ -1,20 +1,9 @@
 import mongoose = require("mongoose");
 import { DocumentQuery } from "mongoose";
+import { IRead } from "./iread";
+import { IWrite } from "./iwrite";
 
-export interface IRead<T> {
-    retrieve: (callback: (error: any, result: any) => void) => void;
-    findById: (id: string, callback: (error: any, result: T) => void) => void;
-    findOne(cond?: Object, callback?: (err: any, res: T) => void): mongoose.Query<T>;
-    find(cond: Object, fields: Object, options: Object, callback?: (err: any, res: T[]) => void): mongoose.Query<T[]>;
-}
-
-export interface IWrite<T> {
-    create: (item: T, callback: (error: any, result: any) => void) => void;
-    update: (_id: mongoose.Types.ObjectId, item: T, callback: (error: any, result: any) => void) => void;
-    delete: (_id: string, callback: (error: any, result: any) => void) => void;
-}
-
-export class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T> {
+export class BaseRepository<T extends mongoose.Document> implements IRead<T>, IWrite<T> {
 
     private _model: mongoose.Model<mongoose.Document>;
 

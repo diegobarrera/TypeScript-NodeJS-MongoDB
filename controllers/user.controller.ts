@@ -1,0 +1,53 @@
+import { Request, Response } from "express";
+import { IUserModel } from "../models/iuser.model";
+import { IUserService } from "../services/iuser.service";
+
+export class UserController {
+    private _userService: IUserService;
+    constructor(userService: IUserService) {
+        this._userService = userService;
+    }
+
+    create(request: Request, response: Response): void {
+        var user: IUserModel = <IUserModel>{ name: request.body.name, age: request.body.age, address: request.body.address };
+        this._userService.createUser(user).then(result => {
+            response.json({ sussess: true });
+        });
+    }
+
+    update(request: Request, response: Response): void {
+        this._userService.findUser(request.body.name).then((hero: IUserModel) => {
+            // now update the Hero
+            hero.age = request.body.age;
+            hero.address = request.body.address;
+            hero.save((err, res) => {
+                if (err) {
+                    response.json({ error: err });
+                    console.log(err);
+                } else {
+                    response.json({ sussess: true });
+                }
+            });
+        }, (err: any) => {
+            if (err) {
+                response.json({ error: err });
+                console.log(err.message);
+            }
+        });
+    }
+
+    get(request: Request, response: Response): void {
+        this._userService.findUser(request.query.name).then((hero: IUserModel) => {
+            if (hero) {
+                response.json(hero);
+            } else {
+                response.json({ result: "User is not found." });
+            }
+        }, (err: any) => {
+            if (err) {
+                response.json({ error: err });
+                console.log(err.message);
+            }
+        });
+    }
+}

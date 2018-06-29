@@ -13,6 +13,7 @@
     "@types/named-routes": "^2.0.0",
     "@types/node": "^10.5.0",
     "@types/promise": "^7.1.30",
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "express-di": "^5.0.0",
     "mongoose": "^5.1.7",
@@ -28,6 +29,7 @@
     "@types/jasmine": "^2.8.8",
     "jasmine": "^3.1.0",
     "ts-node": "^7.0.0",
-    "tslint": "^5.10.0"
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.2"
   }
 }

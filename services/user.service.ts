@@ -1,12 +1,7 @@
-import { IUserModel } from "../1.Models/user";
-import { UserRepository } from "../2.Repositories/userRepository";
 import promise = require("promise");
-
-// a interface of user service
-export interface IUserService {
-    createUser(user: IUserModel): Promise<IUserModel>;
-    findUser(name: string): Promise<IUserModel>;
-}
+import { IUserModel } from "../models/iuser.model";
+import { UserRepository } from "../repositories/user.repository";
+import { IUserService } from "./iuser.service";
 
 // a class of user serivce
 export class UserService implements IUserService {
@@ -17,8 +12,8 @@ export class UserService implements IUserService {
     }
 
     // create a user from model
-    createUser(user: IUserModel): Promise<IUserModel> {
-        let p: Promise<IUserModel> = new promise((resolve, reject) => {
+    createUser(user: IUserModel): Promise<boolean> {
+        let p: Promise<boolean> = new promise((resolve, reject) => {
 
             let User: IUserModel = <IUserModel>{
                 name: user.name,
@@ -31,14 +26,14 @@ export class UserService implements IUserService {
             this._userRepo.create(User, (err, res) => {
                 if (err) {
                     // error callback
-                    reject(err);
+                    console.log(err);
                 } else {
                     // success callback
-                    resolve(res);
+                    resolve(true);
                 }
             });
-        });
 
+        });
         return p;
     }
 

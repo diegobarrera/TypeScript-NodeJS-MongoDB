@@ -1,7 +1,8 @@
 import "jasmine";
-import { UserService, IUserService } from "./userService";
-import { UserRepository } from "../2.Repositories/userRepository";
-import { IUserModel } from "../1.Models/user";
+import { UserService } from "./user.service";
+import { UserRepository } from "../repositories/user.repository";
+import { IUserModel } from "../models/iuser.model";
+import { IUserService } from "./iuser.service";
 
 describe("something", () => {
     it("should work", () => {
@@ -13,9 +14,7 @@ describe("something", () => {
             address: "address",
             phone: "user.phone",
         };
-        service.createUser(user).then(() => {
-
-        });
+        service.createUser(user).then(() => { });
         // expect(service.createUser(user)).toBe(true);
     });
 });

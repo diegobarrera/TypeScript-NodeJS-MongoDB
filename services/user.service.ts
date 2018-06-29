@@ -14,12 +14,12 @@ export class UserService implements IUserService {
     // create a user from model
     createUser(user: IUserModel): Promise<boolean> {
         let p: Promise<boolean> = new promise((resolve, reject) => {
-
             let User: IUserModel = <IUserModel>{
                 name: user.name,
                 age: user.age,
                 address: user.address,
                 phone: user.phone,
+                password: user.password,
             };
 
             // call repository to create user
@@ -32,7 +32,6 @@ export class UserService implements IUserService {
                     resolve(true);
                 }
             });
-
         });
         return p;
     }

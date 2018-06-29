@@ -1,20 +1,11 @@
 // register mongoose library
-import { Document, model, Model } from "mongoose";
+import { model, Model } from "mongoose";
 import Mongoose = require("mongoose");
+import { IUserModel } from "./iuser.model";
 
 // export is a keyword that makes a class/interface public
 // tslint:disable-next-line:typedef
 export const Schema = Mongoose.Schema;
-
-// model of entity User
-export interface IUserModel extends Document {
-    name: string;
-    address: string;
-    phone: string;
-    age: number;
-    createdAt: Date;
-    modifiedAt: Date;
-}
 
 // define the schema (field, validation) of entity User
 let schema: Mongoose.Schema = new Schema({

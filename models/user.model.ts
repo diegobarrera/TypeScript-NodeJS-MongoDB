@@ -25,6 +25,10 @@ let schema: Mongoose.Schema = new Schema({
         type: Number,
         required: true
     },
+    password: {
+        type: String,
+        required: false
+    },
     createdAt: {
         type: Date,
         required: false

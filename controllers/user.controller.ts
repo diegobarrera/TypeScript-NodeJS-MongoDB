@@ -9,7 +9,12 @@ export class UserController {
     }
 
     create(request: Request, response: Response): void {
-        var user: IUserModel = <IUserModel>{ name: request.body.name, age: request.body.age, address: request.body.address };
+        var user: IUserModel = <IUserModel>{
+            name: request.body.name,
+            age: request.body.age,
+            address: request.body.address,
+            password: request.body.password
+        };
         this._userService.createUser(user).then(result => {
             response.json({ sussess: true });
         });
@@ -20,6 +25,7 @@ export class UserController {
             // now update the Hero
             hero.age = request.body.age;
             hero.address = request.body.address;
+            hero.password = request.body.password;
             hero.save((err, res) => {
                 if (err) {
                     response.json({ error: err });
@@ -49,5 +55,6 @@ export class UserController {
                 console.log(err.message);
             }
         });
+        console.log("bbbbb");
     }
 }

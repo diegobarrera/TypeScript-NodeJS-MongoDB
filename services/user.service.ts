@@ -39,7 +39,6 @@ export class UserService implements IUserService {
     // find a user by name
     findUser(name: string): Promise<IUserModel> {
         let p: Promise<IUserModel> = new promise((resolve, reject) => {
-
             // call repository to find user
             this._userRepo.find({ name: name }).sort({ createdAt: -1 }).limit(1).exec((err, res) => {
                 if (err) {

@@ -16,7 +16,7 @@ describe("something", () => {
             phone: "user.phone",
         };
         service.createUser(user).then(result => {
-            expect(result).toBe(false);
+            expect(result).toBe(true);
         });
     });
 });

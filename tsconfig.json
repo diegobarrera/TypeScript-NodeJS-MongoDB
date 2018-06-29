@@ -10,13 +10,14 @@
     },
     "include": [
         "app.ts",
-        "1.Models/*",
-        "2.Repositories/*",
-        "3.Services/*",
-        "4.Controllers/*"
+        "models/*",
+        "repositories/*",
+        "services/*",
+        "controllers/*"
     ],
     "exclude": [
         "node_modules/*",
+        "services-mock/*",
         "*.spec.ts",
     ]
 }

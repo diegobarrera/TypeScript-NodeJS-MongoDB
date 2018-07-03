@@ -8,7 +8,7 @@ import { UserService } from "../services/user.service";
 import { IUserModel } from "../models/iuser.model";
 import express = require("express");
 
-export class ServiceRegister {
+export class RouteRegister {
     _app: any;
     constructor(app: any) {
         this._app = app;
@@ -24,6 +24,10 @@ export class ServiceRegister {
             next(null, new UserController(service));
         });
 
+        this._app.get("/", (homeController: HomeController, req: Request, res: Response) => {
+            homeController.index(req, res);
+        });
+
         this._app.post("/login", (req: Request, res: Response) => {
             if (req.body.name && req.body.password) {
                 let name: string = req.body.name;
@@ -32,7 +36,7 @@ export class ServiceRegister {
                 let service: IUserService = new UserService(repo);
 
                 // usually this would be a database call:
-                service.findUser(name).then((user: IUserModel) => {
+                service.findUser(name).subscribe((user: IUserModel) => {
                     if (!user) {
                         res.status(401).json({ message: "no such user found" });
                     }
@@ -88,10 +92,6 @@ export class ServiceRegister {
         });
 
         // register route
-        apiRoutes.get("/", (homeController: HomeController, req: Request, res: Response) => {
-            homeController.index(req, res);
-        });
-
         apiRoutes.get("/user/get", (userController: UserController, req: Request, res: Response) => {
             userController.get(req, res);
         });

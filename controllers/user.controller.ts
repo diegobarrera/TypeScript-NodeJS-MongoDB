@@ -15,13 +15,13 @@ export class UserController {
             address: request.body.address,
             password: request.body.password
         };
-        this._userService.createUser(user).then(result => {
+        this._userService.createUser(user).subscribe(result => {
             response.json({ sussess: true });
         });
     }
 
     update(request: Request, response: Response): void {
-        this._userService.findUser(request.body.name).then((hero: IUserModel) => {
+        this._userService.findUser(request.body.name).subscribe((hero: IUserModel) => {
             // now update the Hero
             hero.age = request.body.age;
             hero.address = request.body.address;
@@ -43,7 +43,7 @@ export class UserController {
     }
 
     get(request: Request, response: Response): void {
-        this._userService.findUser(request.query.name).then((hero: IUserModel) => {
+        this._userService.findUser(request.query.name).subscribe((hero: IUserModel) => {
             if (hero) {
                 response.json(hero);
             } else {
@@ -55,6 +55,5 @@ export class UserController {
                 console.log(err.message);
             }
         });
-        console.log("bbbbb");
     }
 }

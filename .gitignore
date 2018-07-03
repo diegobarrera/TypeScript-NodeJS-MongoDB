@@ -248,3 +248,4 @@ ModelManifest.xml
 
 package-lock.json
 dist/*
+_package/*

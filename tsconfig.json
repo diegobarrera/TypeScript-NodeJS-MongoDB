@@ -6,6 +6,9 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": true,
+        "lib": [
+            "es6"
+        ],
         "target": "es6"
     },
     //"include": [],

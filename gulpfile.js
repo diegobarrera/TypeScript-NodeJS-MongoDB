@@ -27,7 +27,7 @@ gulp.task('zip', function () {
         '!typings',
         '!_package',
 
-        '!**/*.ts', 
+        '!**/*.ts',
         '!controllers/**',
         '!models/**',
         '!registration/**',
@@ -55,4 +55,4 @@ gulp.task('zip', function () {
         .pipe(gulp.dest(options.packagePath));
 });
 
-gulp.task('default',gulp.series('scripts', 'zip'));
+gulp.task('default', gulp.series('scripts', 'zip'));

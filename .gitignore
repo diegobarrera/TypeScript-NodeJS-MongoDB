@@ -246,6 +246,5 @@ ModelManifest.xml
 *.log
 *.log.*
 
-package-lock.json
 dist/*
 _package/*

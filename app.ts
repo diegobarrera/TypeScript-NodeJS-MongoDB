@@ -33,12 +33,12 @@ http.createServer(app).listen(app.get("port"), () => {
 });
 
 // connect MongoDb
-let uri: string = "mongodb://localhost:27017/myDB";
-mongoose.connect(uri, (err) => {
-    if (err) {
-        console.log(err.message);
-        console.log(err);
-    } else {
-        console.log("Connected to MongoDb");
-    }
-});
+// let uri: string = "mongodb://localhost:27017/myDB";
+// mongoose.connect(uri, (err) => {
+//     if (err) {
+//         console.log(err.message);
+//         console.log(err);
+//     } else {
+//         console.log("Connected to MongoDb");
+//     }
+// });
